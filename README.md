@@ -216,17 +216,6 @@ You should see:
 
 ![Failure scenario](screenshots/failure_scenario_ping_loss.png)
 
-## Notes for the Demo
-
-Be ready to explain:
-
-* why a table-miss rule is needed
-* what `PacketIn` means
-* why ARP appears before ICMP
-* how TCP and UDP were generated
-* why the controller must keep running for the network to behave correctly
-* how the logs prove that packet headers were captured and protocols were identified
-
 ## Result
 
 The project successfully demonstrates an SDN packet logger that captures packet headers, identifies protocol types, maintains logs, and shows observable network behavior using Mininet and the Ryu controller.
