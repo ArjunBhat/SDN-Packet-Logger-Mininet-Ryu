@@ -42,6 +42,17 @@ h2 ---+
 
 A small topology was chosen because it makes the controller behavior easy to observe during the demo and keeps the focus on packet logging, flow rules, and protocol identification.
 
+## Flow Rule Design (Match–Action Logic)
+
+The controller installs a table-miss flow rule that forwards unmatched packets
+to the controller using:
+
+actions=CONTROLLER:65535
+
+This ensures PacketIn events are generated whenever the switch does not find
+a matching forwarding rule. The controller then analyzes packet headers and
+forwards packets using PacketOut flood action.
+
 ## Features Implemented
 
 * OpenFlow 1.3 controller using Ryu
@@ -215,6 +226,17 @@ You should see:
 ### 5. Failure scenario
 
 ![Failure scenario](screenshots/failure_scenario_ping_loss.png)
+
+## Performance Observation
+
+Latency was measured using pingall, which showed 0% packet loss when the
+controller was active.
+
+Throughput was measured using iperf TCP and UDP tests, confirming successful
+data transfer between hosts.
+
+Flow-table inspection confirmed that packets were redirected to the controller
+through the table-miss rule before forwarding decisions were applied.
 
 ## Result
 
